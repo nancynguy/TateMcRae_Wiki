@@ -35,63 +35,60 @@
 .topnav {
   display: flex;
   align-items: center;      /* <-- centers items vertically */
+  flex-wrap: wrap;
 }
-
 
 /* Style for page content */
 .content {
   padding: 14px;
   font-size: 22px;
 }
-
 /* When the screen is less than 800 pixels wide */
 @media screen and (max-width: 800px) {
-  /* Hide all links, except for the selected tab */
+  /* Hide all links except the selected one initially */
   .topnav a:not(.active) {
     display: none;
   }
 
-  /* Show the icon that should open and close the topnav */
+  /* Show the hamburger icon */
   .topnav a.icon {
     float: right;
     display: block;
   }
-}
 
-/* When the screen is less than 800 pixels wide, if the user clicks on the icon */
-/* the "responsive" class attribute will be added to the topnav by the JavaScript code */
-/* This media query sets the style for the unfolded topnav */
-/* It makes the topnav look good on small screens (display the links vertically instead of horizontally)  */
-@media screen and (max-width: 800px) {
+  /* When the user clicks the icon, make the topnav responsive */
   .topnav.responsive {
     position: relative;
-  }
-
-  .topnav.responsive a.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
+    display: block;
+    flex-direction: column;
+    align-items: flex-start; /* align stacked links to the left */
   }
 
   .topnav.responsive a {
     float: none;
     display: block;
     text-align: left;
+    width: 100%;
+    padding: 14px 16px;
   }
 
-  @media screen and (max-width: 800px) {
-  .search-form {
-    position: static; /* stop absolute positioning */
-    transform: none; /* remove centering transform */
-    width: 100%; /* let it take full width */
-    justify-content: center; /* center it horizontally */
-    margin-top: 10px; /* small spacing below menu */
+  /* Stack the search bar vertically with the links */
+  .topnav.responsive .search-form {
+    position: static; /* remove absolute positioning */
+    width: 100%; /* take up full width */
+    margin: 10px 0; /* spacing between menu and search bar */
+    display: block;
   }
 
-  .search-form input[type=text] {
-    width: 80%; /* reasonable width for smaller screens */
+  .topnav.responsive .search-form input[type="text"] {
+    width: 90%;
+    display: block;
+    margin: 0 auto; /* center within nav */
+    border: 1px solid #ccc;
+    padding: 8px;
   }
 }
+
 
   /* --- Animated Search Bar --- */
 /* --- Animated Search Bar --- */
@@ -111,7 +108,6 @@
   vertical-align: middle;
 }
 
-
 /* On click, expand fully */
 .search-form input[type=text]:focus {
   width: 100%;
@@ -125,5 +121,31 @@
   margin-top: 6px; /* Centers with nav links */
 }
 
-
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
+
+.search-form input[type="text"] {
+  padding: 6px 40px 6px 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-form button {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.search-form button i {
+  color: #691500;
+  font-size: 18px;
+}
+
+
